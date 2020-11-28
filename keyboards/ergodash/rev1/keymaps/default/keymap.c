@@ -19,32 +19,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* Qwerty
    * ,----------------------------------------------------------------------------------------------------------------------.
-   * | ESC  |   1  |   2  |   3  |   4  |   5  |   6  |                    |   7  |   8  |   9  |   0  |   -  |   =  | Bksp |
+   * |   `  |   1  |   2  |   3  |   4  |   5  |   -  |                    |   +  |   6  |   7  |   8  |   9  |   0  |   \  |
    * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
-   * | Tab  |   Q  |   W  |   E  |   R  |   T  |   `  |                    |   "  |   Y  |   U  |   I  |   O  |   P  |  \   |
+   * | Tab  |   Q  |   W  |   E  |   R  |   T  |  |                    |   "  |   Y  |   U  |   I  |   O  |   P  |   "  |
    * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
-   * | Del  |   A  |   S  |   D  |   F  |   G  |   [  |                    |   ]  |   H  |   J  |   K  |   L  |   ;  | Enter|
+   * | ESC  |   A  |   S  |   D  |   F  |   G  | ____ |                    | ____ |   H  |   J  |   K  |   L  |   ;  | Enter|
    * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
-   * | Shift|   Z  |   X  |   C  |   V  |   B  | Space| Space|      | Space| Space|   N  |   M  |   ,  |   .  |   /  | RALT |
+   * | Shift|   Z  |   X  |   C  |   V  |   B  | Bksp | Space|      | Space| Space|   N  |   M  |   ,  |   .  |   /  |  Up  |
    * |-------------+------+------+------+------+------+------+------+------+------+------+------+------+------+-------------|
-   * | Ctrl |  ALt | EISU | GUI  |||||||| Lower| Space|  Del |||||||| Bksp | Space| Raise|||||||| Left | Down |  Up  | Right|
+   * | Ctrl |  ALt | EISU | GUI  |||||||| Lower| Bksp | Ctrl |||||||| Ctrl | Space| Raise|||||||| RALT | Left | Down | Right|
    * ,----------------------------------------------------------------------------------------------------------------------.
    */
   [_QWERTY] = LAYOUT( \
-    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,                            KC_7,    KC_8,    KC_9,    KC_0, KC_MINS,  KC_EQL, KC_BSPC, \
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_GRV,                        KC_QUOT, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, \
-    KC_DEL,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LBRC ,                       KC_RBRC, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT, \
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_SPC,                        KC_SPC, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_UP, \
-    KC_LCTL, KC_LALT, RGB_TOG, KC_LGUI,             LOWER,   KC_SPC,KC_LCTL,         KC_BSPC,KC_SPC, RAISE, KC_RALT,            KC_LEFT, KC_DOWN, KC_RGHT  \
+    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_MINS,                            KC_EQL, KC_6, KC_7,    KC_8,    KC_9,    KC_0, KC_BSLS, \
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC,                        KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_QUOT, \
+    KC_GRV,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    _______,                       _______, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT, \
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_BSPC,                        KC_SPC, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC__MUTE, \
+    KC_LCTL, KC_LALT, RGB_TOG, KC_LGUI,          LOWER,   KC_BSPC,KC_DEL,         KC_RALT,KC_SPC, RAISE, KC_LEFT,            KC_DOWN, KC_UP, KC_RGHT  \
   ),
 
   /* Lower
    * ,----------------------------------------------------------------------------------------------------------------------.
-   * |  F11 |  F1  |  F2  |  F3  |  F4  |  F5  | VolDown  |              | VolUp  |  F6  |  F7  |  F8  |  F9  |  F10 |  F12 |
+   * |  F11 |  F1  |  F2  |  F3  |  F4  |  F5  |VolDown|                   | VolUp|  F6  |  F7  |  F8  |  F9  |  F10 |  F12 |
    * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
-   * |  ~   |   !  |   @  |   #  |   $  |   %  | Mute |                    |   +  |   ^  |   &  |   *  |   (  |   )  |  |   |
+   * |  ~   |   !  |  Up  |   #  |   $  |   %  | Mute |                    |   +  |   ^  |   &  |   *  |   (  |   )  |  |   |
    * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
-   * | Tab  |   1  |   2  |   3  |   4  |   5  |  Del |                    | Bksp |   H  |   J  |   K  |   L  |   :  |  "   |
+   * | Tab  | Left | Down | Right|   4  |   5  | ____ |                    | ____ |   H  |   J  |   K  |   L  |   :  |  "   |
    * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
    * | Shift|   6  |   7  |   8  |   9  |   0  | Space|                    | Enter|   N  |   M  |   <  |   >  |   ?  | Shift|
    * |-------------+------+------+------+------+------+------+------+------+------+------+------+------+------+-------------|
@@ -52,9 +52,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,----------------------------------------------------------------------------------------------------------------------.
    */
   [_LOWER] = LAYOUT(
-    KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC__VOLDOWN,                  KC__VOLUP, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,  \
-    KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC__MUTE,                        KC_PLUS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE, \
-    KC_TAB,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_DEL ,                        KC_BSPC, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_COLN, KC_DQT , \
+    KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC__VOLDOWN,                      KC__VOLUP, KC_F6, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12, \
+    KC_TILD, KC_EXLM, KC_UP,   KC_HASH, KC_DLR,  KC_PERC, KC__MUTE,                          KC_PLUS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE, \
+    KC_TAB,  KC_LEFT,    KC_DOWN,    KC_RIGHT,    KC_4,    KC_5,    _______,                        _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_COLN, KC_DQT , \
     KC_LSFT, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_SPC ,                        KC_ENT , KC_N,    KC_M,    KC_LT,   KC_GT,   KC_QUES, KC_RSFT, \
     KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC ,KC_DEL,         KC_BSPC,KC_ENT , RAISE,            KC_HOME, KC_PGDN, KC_PGUP, KC_END   \
   ),
@@ -63,20 +63,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,----------------------------------------------------------------------------------------------------------------------.
    * |  F11 |  F1  |  F2  |  F3  |  F4  |  F5  | Prev Track |        | Next Track |  F6  |  F7  |  F8  |  F9  |  F10 |  F12 |
    * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
-   * |  ~   |   !  |   @  |   #  |   $  |   %  | Play/Pause |              |   +  |   ^  |   &  |   *  |   (  |   )  |  |   |
+   * |  ~   |   !  |PageUp|   #  |   $  |   %  | Play/Pause |              |   +  |   ^  |   &  |   *  |   (  |   )  |  |   |
    * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
-   * | Tab  |   1  |   2  |   3  |   4  |   5  |  Del |                    | Bksp | Home |PageDn|PageUp|  End |   :  |  "   |
+   * | Tab  | Home |PgDown| End  |   4  |   5  |  Del |                    | Bksp | Home |PageDn|PageUp|  End |   :  |  "   |
    * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
-   * | Shift|   6  |   7  |   8  |   9  |   0  | Space|                    | Enter|   N  |   M  |   <  |   >  |   ?  | Shift|
+   * | Shift|   6  |   7  |   8  |   9  |   0  | Space|                    | Enter|   N  |   M  |   <  |   >  |   ?  |Play/Pause|
    * |-------------+------+------+------+------+------+------+------+------+------+------+------+------+------+-------------|
    * | Ctrl |  GUI |  ALt | EISU |||||||| Lower| Space|  Del |||||||| Bksp | Enter| Raise|||||||| Home |PageDn|PageUp|  End |
    * ,----------------------------------------------------------------------------------------------------------------------.
    */
   [_RAISE] = LAYOUT(
     KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_MPRV,                       KC_MNXT, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,  \
-    KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_DLR,  KC_PERC, KC_MPLY,                        KC_PLUS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE, \
-    KC_TAB,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_DEL ,                        KC_BSPC, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_COLN, KC_DQT , \
-    KC_LSFT, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_SPC ,                        KC_ENT , KC_N,    KC_M,    KC_LT,   KC_GT,   KC_QUES, KC_RSFT, \
+    KC_TILD, KC_EXLM, KC_PGUP,   KC_HASH, KC_DLR,  KC_PERC, KC_MPLY,                        KC_PLUS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE, \
+    KC_TAB,  KC_HOME,    KC_PGDN,    KC_END,    KC_4,    KC_5,    KC_DEL ,                        KC_BSPC, KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_COLN, KC_DQT , \
+    KC_LSFT, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_SPC ,                        KC_ENT , KC_N,    KC_M,    KC_LT,   KC_GT,   KC_QUES, KC_MPLY, \
     KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC ,KC_DEL,         KC_BSPC,KC_ENT , RAISE,            KC_HOME, KC_PGDN, KC_PGUP, KC_END   \
   ),
 
