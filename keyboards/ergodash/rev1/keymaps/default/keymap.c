@@ -25,6 +25,10 @@ enum custom_keycodes {
   VIM_EASYMOTION_RIGHT,
   VIM_EASYMOTION_UP,
   VIM_EASYMOTION_DOWN,
+  VIM_WINDOW_LEFT,
+  VIM_WINDOW_RIGHT,
+  VIM_WINDOW_UP,
+  VIM_WINDOW_DOWN,
   VIM_FUZZY_FIND,
   LCTRL_W,
   LCTRL_A,
@@ -55,11 +59,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,----------------------------------------------------------------------------------------------------------------------.
    */
   [_QWERTY] = LAYOUT( \
-    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    VIM_SWAP_BUFFER,                            KC_EQL, KC_6, KC_7,    KC_8,    KC_9,    KC_0, KC_MINS, \
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC,                        KC_RBRC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, \
-    _______,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_GRV,                       KC__MUTE, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_BSPC,                        KC_SPC, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RALT, \
-    KC_LCTL, KC_LALT, RGB_TOG, KC_LGUI,          LOWER,   KC_BSPC,KC_DEL,         KC_ENT,KC_SPC, RAISE, KC_LEFT,            KC_DOWN, KC_UP, KC_RGHT  \
+    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    VIM_SWAP_BUFFER,               KC_EQL,   KC_6, KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, \
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC,                       KC_RBRC,  KC_Y, KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, \
+    _______, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_GRV,                        KC__MUTE, KC_H, KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_BSPC,                       KC_SPC,   KC_N, KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RALT, \
+    KC_LCTL, KC_LALT, RGB_TOG, KC_LGUI,          LOWER,   KC_BSPC,KC_DEL,         KC_ENT,KC_SPC,   RAISE,         KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
   ),
 
   /* Lower
@@ -76,11 +80,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,----------------------------------------------------------------------------------------------------------------------.
    */
   [_LOWER] = LAYOUT(
-    KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC__VOLDOWN,                      KC__VOLUP, KC_F6, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12, \
-    _______, _______, LCTRL_W, _______, LCTRL_R, _______, KC__MUTE,                          KC_PLUS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE, \
-    _______, LCTRL_A, _______, LCTRL_D, LCTRL_F, _______, _______,                        _______, KC_LEFT, KC_DOWN, KC_UP, KC_RIGHT, KC_COLN, KC_DQT , \
-    _______, LCTRL_Z, _______, LCTRL_C, LCTRL_V, LCTRL_B, KC_SPC ,                        KC_ENT , KC_N,    KC_M,    KC_LT,   KC_GT,   KC_QUES, KC_RSFT, \
-    _______, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC ,KC_DEL,         KC_BSPC,KC_ENT , RAISE,            KC_HOME, KC_PGDN, KC_PGUP, KC_END   \
+    KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC__VOLDOWN,                    KC__VOLUP, KC_F6,               KC_F7,               KC_F8,             KC_F9,                KC_F10,  KC_F12, \
+    _______, _______, LCTRL_W, _______, LCTRL_R, _______, KC__MUTE,                       KC_PLUS,   KC_CIRC,             KC_AMPR,             KC_ASTR,           KC_LPRN,              KC_RPRN, KC_PIPE, \
+    _______, LCTRL_A, _______, LCTRL_D, LCTRL_F, _______, _______,                        _______,   VIM_EASYMOTION_LEFT, VIM_EASYMOTION_DOWN, VIM_EASYMOTION_UP, VIM_EASYMOTION_RIGHT, KC_COLN, KC_DQT , \
+    _______, LCTRL_Z, _______, LCTRL_C, LCTRL_V, LCTRL_B, KC_SPC ,                        KC_ENT ,   VIM_WINDOW_LEFT,     VIM_WINDOW_DOWN,     VIM_WINDOW_UP,     VIM_WINDOW_RIGHT,     KC_QUES, KC_RSFT, \
+    _______, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC ,KC_DEL,         KC_BSPC,KC_ENT ,   RAISE,                                    KC_HOME,           KC_PGDN,              KC_PGUP, KC_END   \
   ),
 
   /* Raise
@@ -97,11 +101,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,----------------------------------------------------------------------------------------------------------------------.
    */
   [_RAISE] = LAYOUT(
-    KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_MPRV,                       KC_MNXT, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F12,  \
-    KC_TILD, KC_EXLM, KC_PGUP,   KC_HASH, KC_DLR,  KC_PERC, KC_MPLY,                        KC_PLUS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN, KC_RPRN, KC_PIPE, \
-    KC_TAB,  KC_HOME,    KC_PGDN,    KC_END,    KC_4,    VIM_FUZZY_FIND,    KC_DEL ,                        KC_BSPC, VIM_EASYMOTION_LEFT, VIM_EASYMOTION_DOWN, VIM_EASYMOTION_UP, VIM_EASYMOTION_RIGHT, KC_COLN, KC_DQT , \
-    KC_LSFT, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_SPC ,                        KC_ENT , KC_N,    KC_M,    KC_LT,   KC_GT,   KC_QUES, KC_MPLY, \
-    KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC ,KC_DEL,         KC_BSPC,KC_ENT , RAISE,            KC_HOME, KC_PGDN, KC_PGUP, KC_END   \
+    KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_MPRV,                        KC_MNXT, KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_F12,  \
+    KC_TILD, KC_EXLM, KC_PGUP, KC_HASH, KC_DLR,  KC_PERC, KC_MPLY,                        KC_PLUS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN,  KC_RPRN, KC_PIPE, \
+    KC_TAB,  KC_HOME, KC_PGDN,  KC_END, KC_4,    VIM_FUZZY_FIND, KC_DEL,                  KC_BSPC, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_COLN, KC_DQT , \
+    KC_LSFT, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_SPC ,                        KC_ENT , KC_HOME, KC_PGDN, KC_PGUP, KC_END,   KC_QUES, KC_MPLY, \
+    KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC ,KC_DEL,         KC_BSPC,KC_ENT , RAISE,            KC_HOME, KC_PGDN,  KC_PGUP, KC_END   \
   ),
 
   /* Adjust
@@ -211,6 +215,42 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case VIM_EASYMOTION_UP:
       if (record->event.pressed) {
         SEND_STRING("`");
+        SEND_STRING("k");
+      } else {
+        // when released.
+      }
+      return false;
+      break;
+    case VIM_WINDOW_RIGHT:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("w"));
+        SEND_STRING("l");
+      } else {
+        // when released.
+      }
+      return false;
+      break;
+    case VIM_WINDOW_LEFT:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("w"));
+        SEND_STRING("h");
+      } else {
+        // when released.
+      }
+      return false;
+      break;
+    case VIM_WINDOW_DOWN:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("w"));
+        SEND_STRING("j");
+      } else {
+        // when released.
+      }
+      return false;
+      break;
+    case VIM_WINDOW_UP:
+      if (record->event.pressed) {
+        SEND_STRING(SS_LCTL("w"));
         SEND_STRING("k");
       } else {
         // when released.
