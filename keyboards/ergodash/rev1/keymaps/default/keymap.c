@@ -14,6 +14,9 @@
       return false; \
       break;
 
+/* For super tab behavior */
+bool is_super_tab_active = false;
+uint16_t super_tab_timer = 0;
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -39,6 +42,8 @@ enum custom_keycodes {
   LCTRL_V,
   LCTRL_F,
   LCTRL_B,
+  SUPER_TAB,
+  SUPER_GRV,
 };
 
 #define EISU LALT(KC_GRV)
@@ -47,23 +52,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* Qwerty
    * ,----------------------------------------------------------------------------------------------------------------------.
-   * |   `  |   1  |   2  |   3  |   4  |   5  |Custom|                    |   +  |   6  |   7  |   8  |   9  |   0  | ____ |
+   * | ESC  |   1  |   2  |   3  |   4  |   5  |Custom|                    |   +  |   6  |   7  |   8  |   9  |   0  | ____ |
    * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
-   * | Tab  |   Q  |   W  |   E  |   R  |   T  |   [  |                    |   ]  |   Y  |   U  |   I  |   O  |   P  |   "  |
+   * | Tab  |   Q  |   W  |   E  |   R  |   T  | Mute |                    |   [  |   Y  |   U  |   I  |   O  |   P  |   "  |
    * |------+------+------+------+------+------+------+--------------------+------+------+------+------+------+------+------|
-   * | ESC  |   A  |   S  |   D  |   F  |   G  | ____ |                    | ____ |   H  |   J  |   K  |   L  |   ;  | Enter|
+   * | ____ |   A  |   S  |   D  |   F  |   G  |  `   |                    |   ]  |   H  |   J  |   K  |   L  |   ;  | Enter|
    * |------+------+------+------+------+------+---------------------------+------+------+------+------+------+------+------|
    * | Shift|   Z  |   X  |   C  |   V  |   B  | Bksp |  Del |      | Enter| Space|   N  |   M  |   ,  |   .  |   /  | Mute |
    * |-------------+------+------+------+------+------+------+------+------+------+------+------+------+------+-------------|
-   * | Ctrl |  ALt | EISU | GUI  |||||||| Lower| Bksp |  Del |||||||| Enter| Space| Raise|||||||| Left | Down |  Up  |Right |
+   * | Ctrl |  ALt | ALt  | GUI  |||||||| Lower| Bksp |  Del |||||||| Enter| Space| Raise|||||||| Left | Down |  Up  |Right |
    * ,----------------------------------------------------------------------------------------------------------------------.
    */
   [_QWERTY] = LAYOUT( \
-    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    VIM_SWAP_BUFFER,               KC_EQL,   KC_6, KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, \
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_LBRC,                       KC_RBRC,  KC_Y, KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, \
-    _______, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_GRV,                        KC__MUTE, KC_H, KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_BSPC,                       KC_SPC,   KC_N, KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RALT, \
-    KC_LCTL, KC_LALT, RGB_TOG, KC_LGUI,          LOWER,   KC_BSPC,KC_DEL,         KC_ENT,KC_SPC,   RAISE,         KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
+    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    VIM_SWAP_BUFFER,                 KC_RALT,   KC_6, KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, \
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC__MUTE,                        KC_LBRC,  KC_Y, KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, \
+    _______, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_GRV,                          KC_RBRC, KC_H, KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    SUPER_GRV,                       KC_SPC,   KC_N, KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_EQL, \
+    KC_LCTL, KC_LALT, KC_LALT, KC_LGUI,          LOWER,   KC_BSPC, KC_DEL,         KC_ENT, KC_SPC,   RAISE,         KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
   ),
 
   /* Lower
@@ -82,8 +87,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_LOWER] = LAYOUT(
     KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC__VOLDOWN,                    KC__VOLUP, KC_F6,               KC_F7,               KC_F8,             KC_F9,                KC_F10,  KC_F12, \
     _______, _______, LCTRL_W, _______, LCTRL_R, _______, KC__MUTE,                       KC_PLUS,   KC_CIRC,             KC_AMPR,             KC_ASTR,           KC_LPRN,              KC_RPRN, KC_PIPE, \
-    _______, LCTRL_A, _______, LCTRL_D, LCTRL_F, _______, _______,                        _______,   VIM_EASYMOTION_LEFT, VIM_EASYMOTION_DOWN, VIM_EASYMOTION_UP, VIM_EASYMOTION_RIGHT, KC_COLN, KC_DQT , \
-    _______, LCTRL_Z, _______, LCTRL_C, LCTRL_V, LCTRL_B, KC_SPC ,                        KC_ENT ,   VIM_WINDOW_LEFT,     VIM_WINDOW_DOWN,     VIM_WINDOW_UP,     VIM_WINDOW_RIGHT,     KC_QUES, KC_RSFT, \
+    _______, LCTRL_A, _______, LCTRL_D, LCTRL_F, _______, _______,                        _______,   KC_LEFT,             KC_DOWN,             KC_UP,             KC_RIGHT,             KC_COLN, KC_DQT , \
+    _______, LCTRL_Z, _______, LCTRL_C, LCTRL_V, LCTRL_B, KC_SPC ,                        KC_ENT ,   VIM_EASYMOTION_LEFT, VIM_EASYMOTION_DOWN, VIM_EASYMOTION_UP, VIM_EASYMOTION_RIGHT, KC_QUES, KC_RSFT, \
     _______, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC ,KC_DEL,         KC_BSPC,KC_ENT ,   RAISE,                                    KC_HOME,           KC_PGDN,              KC_PGUP, KC_END   \
   ),
 
@@ -284,6 +289,34 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       LCTRL_CHARACTER_PRESS(c)
     case LCTRL_R:
       LCTRL_CHARACTER_PRESS(r)
+    case SUPER_TAB:
+      if (record->event.pressed) {
+        if (!is_super_tab_active) {
+          is_super_tab_active = true;
+          register_code(KC_LGUI);
+        }
+        super_tab_timer = timer_read();
+        register_code(KC_TAB);
+      } else {
+        unregister_code(KC_TAB);
+      }
+      break;
+    case SUPER_GRV:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        SEND_STRING("`");
+      } else {
+        unregister_code(KC_LGUI);
+      }
   }
   return true;
+}
+
+void matrix_scan_user(void) {
+  if (is_super_tab_active) {
+    if (timer_elapsed(super_tab_timer) > 1000) {
+      unregister_code(KC_LGUI);
+      is_super_tab_active = false;
+    }
+  }
 }
