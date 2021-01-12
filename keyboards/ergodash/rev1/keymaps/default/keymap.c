@@ -44,6 +44,9 @@ enum custom_keycodes {
   LCTRL_V,
   LCTRL_F,
   LCTRL_B,
+  LCTRL_LBRC,
+  LCTRL_RBRC,
+  ONETIME_TAB,
   SUPER_TAB,
   SUPER_GRV,
   KC_SLBRC,
@@ -73,7 +76,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC__MUTE,                        KC_LBRC,  KC_Y, KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, \
     _______, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_GRV,                          KC_RBRC, KC_H, KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_DEL,                          KC_SPC,   KC_N, KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS, \
-    KC_LCTL, KC_LALT, KC_LALT, KC_LGUI,          LOWER,   KC_BSPC, KC_LSFT,        KC_ENT, KC_SPC,   RAISE,         KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
+    KC_LCTL, KC_LALT, KC_LALT, KC_LGUI,          LOWER,   KC_BSPC, ONETIME_TAB,    KC_ENT, KC_SPC,   RAISE,         KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
   ),
 
   /* Lower
@@ -91,8 +94,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [_LOWER] = LAYOUT(
     SUPER_GRV, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC__VOLDOWN,                    KC__VOLUP, KC_SLBRC,            KC_SRBRC,            KC_F8,             KC_F9,                KC_F10,  KC_F12, \
-    KC_TAB,    _______, LCTRL_W, _______, LCTRL_R, LCTRL_T, KC__MUTE,                       KC_PLUS,   KC_LBRC,             KC_RBRC,             KC_ASTR,           _______,              KC_LBRC, KC_RBRC, \
-    _______,   LCTRL_A, _______, LCTRL_D, LCTRL_F, LCTRL_G, _______,                        _______,   KC_LEFT,             KC_DOWN,             KC_UP,             KC_RIGHT,             KC_COLN, KC_DQT , \
+    KC_TAB,    _______, LCTRL_W, _______, LCTRL_R, LCTRL_T, KC__MUTE,                       LCTRL_LBRC,KC_LBRC,             KC_RBRC,             KC_ASTR,           _______,              KC_LBRC, KC_RBRC, \
+    _______,   LCTRL_A, _______, LCTRL_D, LCTRL_F, LCTRL_G, _______,                        LCTRL_RBRC,KC_LEFT,             KC_DOWN,             KC_UP,             KC_RIGHT,             KC_COLN, KC_DQT , \
     _______,   LCTRL_Z, _______, LCTRL_C, LCTRL_V, LCTRL_B, KC_SPC ,                        KC_ENT ,   VIM_EASYMOTION_LEFT, VIM_EASYMOTION_DOWN, VIM_EASYMOTION_UP, VIM_EASYMOTION_RIGHT, KC_QUES, KC_RSFT, \
     _______,   KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC ,KC_DEL,         KC_BSPC,KC_ENT ,   RAISE,                                    KC_HOME,           KC_PGDN,              KC_PGUP, KC_END   \
   ),
@@ -298,6 +301,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       LCTRL_CHARACTER_PRESS(t)
     case LCTRL_G:
       LCTRL_CHARACTER_PRESS(g)
+    case LCTRL_LBRC:
+      LCTRL_CHARACTER_PRESS([)
+    case LCTRL_RBRC:
+      LCTRL_CHARACTER_PRESS(])
+    case ONETIME_TAB:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        register_code(KC_TAB);
+      } else {
+        unregister_code(KC_TAB);
+        unregister_code(KC_LGUI);
+      }
+      break;
     case SUPER_TAB:
       if (record->event.pressed) {
         if (!is_super_tab_active) {
