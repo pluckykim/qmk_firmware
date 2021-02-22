@@ -116,11 +116,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,----------------------------------------------------------------------------------------------------------------------.
    */
   [_RAISE] = LAYOUT(
-    KC_F11,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_MPRV,                        KC_MNXT, KC_F6,   KC_F7,   KC_F8,   KC_F9,    KC_F10,  KC_F12,  \
-    KC_TILD, KC_EXLM, KC_PGUP, KC_HASH, KC_DLR,  KC_PERC, KC_MPLY,                        KC_PLUS, KC_CIRC, KC_AMPR, KC_ASTR, KC_LPRN,  KC_RPRN, KC_PIPE, \
-    KC_TAB,  KC_HOME, KC_PGDN,  KC_END, KC_4,    VIM_FUZZY_FIND, KC_DEL,                  KC_BSPC, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, KC_COLN, KC_DQT , \
-    KC_LSFT, KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_SPC ,                        KC_ENT , KC_HOME, KC_PGDN, KC_PGUP, KC_END,   KC_QUES, KC_MPLY, \
-    KC_LCTL, KC_LGUI, KC_LALT, EISU,             LOWER,   KC_SPC ,KC_DEL,         KC_BSPC,KC_ENT , RAISE,            KC_HOME, KC_PGDN,  KC_PGUP, KC_END   \
+    _______, KC_F11,     KC_F12,  KC_F13,     KC_F14,  KC_F15,  KC_MPRV,                  KC_MNXT, _______, _______, _______, _______,  _______, _______, \
+    XXXXXXX, KC_MS_BTN1, KC_MS_U, KC_MS_BTN2, KC_WH_U, XXXXXXX, KC_MPLY,                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, \
+    XXXXXXX, KC_MS_L,    KC_MS_D, KC_MS_R,    KC_WH_D, XXXXXXX, XXXXXXX,                  XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, XXXXXXX, XXXXXXX, \
+    XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX,    KC_WH_L, KC_WH_R, XXXXXXX,                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,\
+    XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX,             LOWER,   XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX, RAISE,            XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX  \
   ),
 
   /* Adjust
