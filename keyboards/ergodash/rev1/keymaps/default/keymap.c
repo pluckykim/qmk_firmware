@@ -54,6 +54,8 @@ enum custom_keycodes {
   KC_SLBRC,
   KC_SRBRC,
   OPTION_O,
+  CH_PREV_TAB,
+  CH_NEXT_TAB,
 };
 
 #define EISU LALT(KC_GRV)
@@ -75,7 +77,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [_QWERTY] = LAYOUT( \
     KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC__VOLDOWN,                   KC__VOLUP, KC_6, KC_7,    KC_8,    KC_9,    KC_0,    KC_EQL, \
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC__MUTE,                        KC_RALT, KC_Y, KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, \
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    OPTION_O,                        KC_RALT, KC_Y, KC_U,    KC_I,    KC_O,    KC_P,    KC_BSLS, \
     _______, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_GRV,                          KC_MINS, KC_H, KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_DEL,                       LCTRL_RBRC, KC_N, KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_MINS, \
     KC_LCTL, KC_LALT, KC_LALT, KC_LGUI,          LOWER,   KC_BSPC, KC_SPC,          KC_ENT, KC_SPC, RAISE,         KC_LEFT, KC_LBRC, KC_RBRC, KC_RGHT  \
@@ -120,7 +122,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     XXXXXXX, KC_MS_BTN1, KC_MS_U, KC_MS_BTN2, KC_WH_U, XXXXXXX, KC_MPLY,                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, \
     XXXXXXX, KC_MS_L,    KC_MS_D, KC_MS_R,    KC_WH_D, XXXXXXX, XXXXXXX,                  XXXXXXX, KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT, XXXXXXX, XXXXXXX, \
     XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX,    KC_WH_L, KC_WH_R, XXXXXXX,                  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX,\
-    XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX,             LOWER,   XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX, RAISE,            XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX  \
+    XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX,             LOWER,   XXXXXXX, XXXXXXX, XXXXXXX,XXXXXXX, RAISE,        CH_PREV_TAB, XXXXXXX,  XXXXXXX, CH_NEXT_TAB \
   ),
 
   /* Adjust
@@ -361,6 +363,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
+
+    case CH_PREV_TAB:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        register_code(KC_LALT);
+        register_code(KC_LEFT);
+      } else {
+        unregister_code(KC_LEFT);
+        unregister_code(KC_LALT);
+        unregister_code(KC_LGUI);
+      }
+      break;
+
+    case CH_NEXT_TAB:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        register_code(KC_LALT);
+        register_code(KC_RIGHT);
+      } else {
+        unregister_code(KC_RIGHT);
+        unregister_code(KC_LALT);
+        unregister_code(KC_LGUI);
+      }
+      break;
+
 
   }
   return true;

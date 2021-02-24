@@ -53,6 +53,8 @@ enum custom_keycodes {
   KC_SLBRC,
   KC_SRBRC,
   OPTION_O,
+  CH_PREV_TAB,
+  CH_NEXT_TAB,
 };
 
 #define EISU LALT(KC_GRV)
@@ -99,7 +101,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_WH_L ,KC_WH_R ,_______ ,_______ ,        _______ ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,     KC_BTN1 ,    KC_BTN2 ,_______ ,        _______ ,_______ ,    XXXXXXX ,     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX 
+     XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,     KC_BTN1 ,    KC_BTN2 ,_______ ,        _______ ,_______ ,    XXXXXXX ,    CH_PREV_TAB,XXXXXXX,XXXXXXX,CH_NEXT_TAB
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
   ),
 
@@ -334,6 +336,30 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         // when released.
       }
       return false;
+      break;
+
+    case CH_PREV_TAB:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        register_code(KC_LALT);
+        register_code(KC_LEFT);
+      } else {
+        unregister_code(KC_LEFT);
+        unregister_code(KC_LALT);
+        unregister_code(KC_LGUI);
+      }
+      break;
+
+    case CH_NEXT_TAB:
+      if (record->event.pressed) {
+        register_code(KC_LGUI);
+        register_code(KC_LALT);
+        register_code(KC_RIGHT);
+      } else {
+        unregister_code(KC_RIGHT);
+        unregister_code(KC_LALT);
+        unregister_code(KC_LGUI);
+      }
       break;
 
   }
