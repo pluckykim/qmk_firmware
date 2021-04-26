@@ -340,25 +340,38 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case CH_PREV_TAB:
       if (record->event.pressed) {
-        register_code(KC_LGUI);
-        register_code(KC_LALT);
-        register_code(KC_LEFT);
+        register_code(KC_LCTL);
+        register_code(KC_LSFT);
+        register_code(KC_TAB);
+
+        // register_code(KC_LGUI);
+        // register_code(KC_LALT);
+        // register_code(KC_LEFT);
       } else {
-        unregister_code(KC_LEFT);
-        unregister_code(KC_LALT);
-        unregister_code(KC_LGUI);
+        unregister_code(KC_TAB);
+        unregister_code(KC_LSFT);
+        unregister_code(KC_LCTL);
+        // unregister_code(KC_LEFT);
+        // unregister_code(KC_LALT);
+        // unregister_code(KC_LGUI);
       }
       break;
 
     case CH_NEXT_TAB:
       if (record->event.pressed) {
-        register_code(KC_LGUI);
-        register_code(KC_LALT);
-        register_code(KC_RIGHT);
+        register_code(KC_LCTL);
+        register_code(KC_TAB);
+
+        // register_code(KC_LGUI);
+        // register_code(KC_LALT);
+        // register_code(KC_RIGHT);
       } else {
-        unregister_code(KC_RIGHT);
-        unregister_code(KC_LALT);
-        unregister_code(KC_LGUI);
+        unregister_code(KC_TAB);
+        unregister_code(KC_LCTL);
+
+        // unregister_code(KC_RIGHT);
+        // unregister_code(KC_LALT);
+        // unregister_code(KC_LGUI);
       }
       break;
 
