@@ -52,6 +52,7 @@ enum custom_keycodes {
   ONETIME_TAB,
   SUPER_TAB,
   SUPER_GRV,
+  VSCODE_GITLENS_TRIGGER,
   KC_SLBRC,
   KC_SRBRC,
   OPTION_O,
@@ -69,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //┌────────┬────────┬────────┬────────┬────────┬────────┐                                           ┌────────┬────────┬────────┬────────┬────────┬────────┐
      KC_GRV , KC_1    ,KC_2    ,KC_3    ,KC_4    ,KC_5    ,                                            KC_6    ,KC_7    ,KC_8    ,KC_9    ,KC_0    ,KC_EQL ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     KC_TAB  ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,OPTION_O,                          KC_RALT ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_BSLS,
+     KC_TAB  ,KC_Q    ,KC_W    ,KC_E    ,KC_R    ,KC_T    ,OPTION_O,                          KC_PAST ,KC_Y    ,KC_U    ,KC_I    ,KC_O    ,KC_P    ,KC_BSLS,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      KC_ESC  ,KC_A    ,KC_S    ,KC_D    ,KC_F    ,KC_G    ,KC_GRV ,                          KC_RALT, KC_H    ,KC_J    ,KC_K    ,KC_L    ,KC_SCLN ,KC_QUOT ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
@@ -87,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      _______ ,LCTRL_A ,LCTRL_S ,LCTRL_D ,LCTRL_F ,LCTRL_G ,KC__MUTE,                          _______ ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RIGHT,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     _______ ,LCTRL_Z ,LCTRL_X ,LCTRL_C ,LCTRL_V ,LCTRL_B ,_______ ,_______ ,    KC__VOLDOWN,KC__VOLUP,CH_PREV_TAB,_______ ,_______ ,CH_NEXT_TAB,_______ ,_______ ,
+     _______ ,LCTRL_Z ,LCTRL_X ,LCTRL_C ,LCTRL_V ,LCTRL_B ,KC_F20  ,_______ ,    KC__VOLDOWN,KC__VOLUP,CH_PREV_TAB,_______ ,_______ ,CH_NEXT_TAB,_______ ,_______ ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
      _______ ,_______ ,_______ ,_______ ,     LOWER   ,    _______ ,_______ ,        _______ ,_______ ,    RAISE   ,     KC_HOME ,KC_PGDN ,KC_PGUP ,KC_END
   //└────────┴────────┴────────┴────────┘    └────────┘   └────────┴────────┘       └────────┴────────┘   └────────┘    └────────┴────────┴────────┴────────┘
@@ -99,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┐                         ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX ,KC_MS_BTN1,KC_MS_U ,KC_MS_BTN2,KC_WH_U ,XXXXXXX ,KC_MPRV,                       KC_MNXT, XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┤                         ├────────┼────────┼────────┼────────┼────────┼────────┼────────┤
-     XXXXXXX ,KC_MS_L ,KC_MS_D ,KC_MS_R ,KC_WH_D ,XXXXXXX ,KC_MPLY,                           _______ ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RIGHT,XXXXXXX ,XXXXXXX ,
+     XXXXXXX ,KC_MS_L ,KC_MS_D ,KC_MS_R ,KC_WH_D ,VSCODE_GITLENS_TRIGGER,KC_MPLY,             _______ ,KC_LEFT ,KC_DOWN ,KC_UP   ,KC_RIGHT,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┐       ┌────────┼────────┼────────┼────────┼────────┼────────┼────────┼────────┤
      XXXXXXX ,XXXXXXX ,XXXXXXX ,XXXXXXX ,KC_WH_L ,KC_WH_R ,_______ ,_______ ,        _______ ,XXXXXXX ,CH_PREV_TAB,XXXXXXX ,XXXXXXX ,CH_NEXT_TAB,XXXXXXX ,XXXXXXX ,
   //├────────┼────────┼────────┼────────┼────┬───┴────┬───┼────────┼────────┤       ├────────┼────────┼───┬────┴───┬────┼────────┼────────┼────────┼────────┤
@@ -316,6 +317,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("`");
       } else {
         unregister_code(KC_LGUI);
+      }
+      break;
+    case VSCODE_GITLENS_TRIGGER:
+      if (record->event.pressed) {
+        register_code(KC_LALT);
+        register_code(KC_LGUI);
+        SEND_STRING("g");
+      } else {
+        unregister_code(KC_LGUI);
+        unregister_code(KC_LALT);
       }
       break;
     case KC_SLBRC:
